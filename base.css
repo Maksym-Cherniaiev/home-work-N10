@@ -1,0 +1,7 @@
+@import "css/header.css";
+@import "css/main.css";
+
+.main-container {
+    width: 1080px;
+    margin: auto;
+}

@@ -1,0 +1,13 @@
+@import "header/create.css";
+@import "header/search.css";
+@import "header/show.css";
+
+
+.header-container {
+    display: flex;
+    background: #5cdb95;;
+}
+
+input {
+    outline: none;
+}

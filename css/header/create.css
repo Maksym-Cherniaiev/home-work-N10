@@ -1,0 +1,40 @@
+.create {
+    width: 33.33%;
+    padding: 20px 0 20px 0;
+}
+
+.create__user-form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    margin: auto;
+}
+
+.create-user {
+    border: none;
+    height: 35px;
+    border-radius: 4px;
+    background: #edf5e1;
+    font-size: 24px;
+    padding-left: 10px;
+    margin: 0 0 10px 0;
+    color: #05386b;
+}
+
+.create-user__submit {
+    height: 35px;
+    border-radius: 4px;
+    outline: none;
+    background: #8ee4af;
+    border: 2px solid #379683;
+    font-size: 20px;
+    color: #05386b;
+}
+
+.create-user__submit:hover {
+    background: #9cfcc1;
+}
+
+.create-user__submit:active {
+    background: #379683;
+}
