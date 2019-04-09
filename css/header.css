@@ -5,9 +5,13 @@
 
 .header-container {
     display: flex;
-    background: #5cdb95;;
+    background: #3aafa9;;
 }
 
 input {
     outline: none;
+}
+
+::placeholder {
+    color: #def2f1;
 }

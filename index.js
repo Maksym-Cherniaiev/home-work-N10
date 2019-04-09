@@ -71,6 +71,8 @@ class ShowUser extends Render {
 		super();
 		this.userName = document.querySelector(".search__user-name").value;
 		this.userAge = document.querySelector(".search__user-age").value;
+		this.addUserName = document.querySelector(".create__user-name").value;
+		this.addUserAge = document.querySelector(".create__user-age").value;
 	}
 	
 	searchByName(user) {
@@ -86,7 +88,14 @@ class ShowUser extends Render {
 		}
 	}
 
-	async renderByNameAge() {
+	clearPage() {
+		while (this.userContainer.firstChild) {
+			this.userContainer.removeChild(this.userContainer.firstChild);
+		}
+		return this.userContainer;
+	}
+
+	async getByNameAge() {
 		await this.getUserData(this.END_POINT, "get");
 		this.userData["data"].forEach(user => {
 			if (this.userName) {
@@ -97,24 +106,39 @@ class ShowUser extends Render {
 		});
 	}
 
-	async renderAllUser() {
+	async getAllUser() {
 		await this.getUserData(this.END_POINT, "get");
 		this.userData["data"].forEach(user => {
 			return this.createUserCard(user.name, user.age);
 		});
 	}
+
+	async createUser() {
+		const user = {
+			name: this.addUserName,
+			age: this.addUserAge
+		}
+		await this.getUserData(this.END_POINT, "post", user);
+		return this.createUserCard(this.addUserName, this.addUserAge);
+	}
 }
 
 document.querySelector(".show-all").addEventListener("click", showUser);
+document.querySelector(".clear-all").addEventListener("click", showUser);
 document.querySelector(".search-user__submit").addEventListener("click", showUser);
 document.querySelector(".search__user-name").addEventListener("keyup", showUser);
 document.querySelector(".search__user-age").addEventListener("keyup", showUser);
+document.querySelector(".create-user__submit").addEventListener("click", showUser);
 
 function showUser(event) {
 	const userData = new ShowUser();
 	if (event.target.classList[0] === "show-all") {
-		userData.renderAllUser();
+		userData.getAllUser();
 	} else if (event.target.classList[0] === "search-user__submit" || event.keyCode == 13) {
-		userData.renderByNameAge();
+		userData.getByNameAge();
+	} else if (event.target.classList[0] === "clear-all") {
+		userData.clearPage();
+	} else if (event.target.classList[0] === "create-user__submit") {
+		userData.createUser();
 	}
 }
