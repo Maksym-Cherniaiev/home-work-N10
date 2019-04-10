@@ -1,6 +1,8 @@
 .search {
     width: 33.33%;
     padding: 20px 0 20px 0;
+    margin: 10px;
+    background: #fafafa;
 }
 
 .search-user__form {
@@ -14,30 +16,34 @@
     box-sizing: border-box;
     border: none;
     height: 35px;
-    border-radius: 16px;
-    background: #2b7a78;
+    border-radius: 4px;
+    background: rgb(240, 235, 233);
     font-size: 16px;
-    padding-left: 15px;
+    padding: 0 15px 0 15px;
     margin: 0 0 10px 0;
-    color: #def2f1;
+    color: #4c4d4f;
     font-family: 'font85c05d10b3053bdd5f020fb145c92694';
+}
+
+.search-user:hover {
+    background: #cfcfcf;
 }
 
 .search-user__submit {
     height: 35px;
-    border-radius: 16px;
+    border-radius: 4px;
     outline: none;
-    background: #def2f1;
-    border: 1px solid #379683;
+    background: #dfdfdf;
+    border: 1px solid #b6b6b6;
     font-size: 16px;
-    color: #17252a;
+    color: #4c4d4f;
     font-family: 'font85c05d10b3053bdd5f020fb145c92694';
 }
 
 .search-user__submit:hover {
-    background: #9cfcc1;
+    background: rgb(238, 238, 238);
 }
 
 .search-user__submit:active {
-    background: #379683;
+    background: rgb(199, 199, 199);
 }

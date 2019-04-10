@@ -3,25 +3,27 @@
     display: flex;
     flex-direction: column;
     width: 320px;
+    margin: 10px;
+    background: #fafafa;
 }
 
 .params-user {
     width: 320px;
     height: 35px;
-    border-radius: 16px;
+    border-radius: 4px;
     outline: none;
-    background: #8ee4af;
-    border: 1px solid #379683;
+    background: #dfdfdf;
+    border: 1px solid #b6b6b6;
     font-size: 16px;
-    color: #05386b;
+    color: #4c4d4f;
     margin: 0 0 10px 0;
     font-family: 'font85c05d10b3053bdd5f020fb145c92694';
 }
 
 .params-user:hover {
-    background: #9cfcc1;
+    background: rgb(238, 238, 238);
 }
 
 .params-user:active {
-    background: #379683;
+    background: rgb(199, 199, 199);
 }

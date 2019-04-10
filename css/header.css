@@ -5,7 +5,7 @@
 
 .header-container {
     display: flex;
-    background: #3aafa9;;
+    background: #ffffff;
 }
 
 input {
@@ -13,5 +13,5 @@ input {
 }
 
 ::placeholder {
-    color: #def2f1;
+    color: #999999;
 }

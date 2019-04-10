@@ -1,7 +1,22 @@
 @import "css/header.css";
 @import "css/main.css";
 
+body {
+    background: #f2f3f7;
+}
+
 .main-container {
     width: 1080px;
     margin: auto;
+    background: #ffffff;
 }
+
+@font-face {
+    font-family: 'font85c05d10b3053bdd5f020fb145c92694';
+        
+        src:    url('https://nomail.com.ua/files/eot/85c05d10b3053bdd5f020fb145c92694.eot?#iefix') format('embedded-opentype'),
+                url('https://nomail.com.ua/files/woff/85c05d10b3053bdd5f020fb145c92694.woff') format('woff'),
+                url('https://nomail.com.ua/files/woff2/85c05d10b3053bdd5f020fb145c92694.woff2') format('woff2');
+    }
+    
+    @font-face { font-family: 'AvenirNext-Heavy';  src: local('AvenirNext-Heavy'), url('https://nomail.com.ua/files/woff/85c05d10b3053bdd5f020fb145c92694.woff') format('woff'); }
