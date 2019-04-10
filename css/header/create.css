@@ -22,7 +22,6 @@
     padding: 0 15px 0 15px;
     margin: 0 0 10px 0;
     color: #4c4d4f;
-    font-family: 'font85c05d10b3053bdd5f020fb145c92694';
 }
 
 .create-user:hover {
@@ -35,9 +34,9 @@
     outline: none;
     background: #dfdfdf;
     border: 1px solid #b6b6b6;
-    font-size: 16px;
+    font-size: 15px;
+    letter-spacing: 2px;
     color: #4c4d4f;
-    font-family: 'font85c05d10b3053bdd5f020fb145c92694';
 }
 
 .create-user__submit:hover {
