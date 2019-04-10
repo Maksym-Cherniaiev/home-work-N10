@@ -1,24 +1,24 @@
 class DataGetter {
 	constructor() {
 		this.END_POINT = "https://test-users-api.herokuapp.com/users";
+		this.URL_NAMES = "https://randomuser.me/api/?results=20";
 	}
 
-	async getUserData(url, method, data) {
+	async getUserData(url, method, data, mode) {
 		try {
 			const response = await fetch(url, {
 				"method": method,
 				"body": JSON.stringify(data),
 				"headers": {
 					"Accept": "application/json",
-					"Content-Type": "application/json",
-				}
-			})
+					"Content-Type": "application/json"
+				},
+				"mode": mode
+			});
 			this.userData = await response.json();
-			console.log(this.userData["data"]);
-			console.log(this.userData);
 			return this.userData;
 		} catch (error) {
-			console.log("request failed");
+			console.log(error,"request failed");
 		}
 	}
 }
@@ -179,15 +179,34 @@ class ShowUser extends Render {
 
 	async updateUser(event) {
 		const formElements = event.target.form.firstChild.childNodes;
-		console.log(formElements);
-		const newName = formElements[1].value
-		const newAge = formElements[2].value
+		const newName = formElements[1].value;
+		const newAge = formElements[2].value;
 		const userObj = {
 			name: newName,
 		  age: newAge
 		}
 		await this.getUserData(`${this.END_POINT}/${event.target.form.id}`, "put", userObj);
 		this.toggleInputActivity(event);
+	}
+
+	async updateServer() {
+		let arrOfId = [];
+		await this.getUserData(this.END_POINT, "get");
+		this.userData.data.forEach(object => {
+			arrOfId.push(object.id);
+		});
+		arrOfId.forEach(async id => {
+			await this.getUserData(`${this.END_POINT}/${id}`, "delete");
+		});
+		await this.getUserData(this.URL_NAMES, "get");
+		this.userData.results.forEach(async object => {
+			const newUser = {
+				name: object.name.first.charAt(0).toUpperCase() + object.name.first.slice(1),
+				age: (Math.floor(Math.random() * (110 - 1)))
+			}
+			await this.getUserData(this.END_POINT, "post", newUser);
+		});
+		console.log(this.userData);
 	}
 }
 
@@ -198,6 +217,7 @@ document.querySelector(".search__user-name").addEventListener("keyup", showUser)
 document.querySelector(".search__user-age").addEventListener("keyup", showUser);
 document.querySelector(".create-user__submit").addEventListener("click", showUser);
 document.querySelector(".user-data-container").addEventListener("click", showUser);
+document.querySelector(".update-server").addEventListener("click", showUser);
 
 function showUser(event) {
 	const userData = new ShowUser();
@@ -216,5 +236,7 @@ function showUser(event) {
 		userData.toggleInputActivity(event);
 	} else if (elementClass === "button__save") {
 		userData.updateUser(event);
+	} else if (elementClass === "update-server") {
+		userData.updateServer();
 	}
 }
