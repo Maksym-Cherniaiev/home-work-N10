@@ -144,7 +144,7 @@ class ShowUser extends Render {
 	async deleteUser(event) {
 		const userCard = event.target.form;
         userCard.remove();
-        await this.users.post(`/users/${userCard.id}`);
+        await this.users.delete(`/users/${userCard.id}`);
 	}
 
 	changeActivity(element) {
