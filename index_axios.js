@@ -197,14 +197,9 @@ class ShowUser extends Render {
 	}
 }
 
-document.querySelector(".show-all").addEventListener("click", showUser);
-document.querySelector(".clear-all").addEventListener("click", showUser);
-document.querySelector(".search-user__submit").addEventListener("click", showUser);
-document.querySelector(".search__user-name").addEventListener("keyup", showUser);
-document.querySelector(".search__user-age").addEventListener("keyup", showUser);
-document.querySelector(".create-user__submit").addEventListener("click", showUser);
+document.querySelector(".header-container").addEventListener("click", showUser);
+document.querySelector(".search-user__form").addEventListener("keyup", showUser);
 document.querySelector(".user-data-container").addEventListener("click", showUser);
-document.querySelector(".update-server").addEventListener("click", showUser);
 
 function showUser(event) {
 	const userData = new ShowUser();
