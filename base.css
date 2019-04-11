@@ -3,6 +3,8 @@
 
 body {
     background: #f2f3f7;
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
 }
 
 .main-container {

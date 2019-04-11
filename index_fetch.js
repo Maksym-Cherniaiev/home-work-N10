@@ -110,17 +110,6 @@ class ShowUser extends Render {
 		}
 	}
 
-	clearPage() {
-		while (this.userContainer.firstChild) {
-			this.userContainer.removeChild(this.userContainer.firstChild);
-		}
-		this.userName.value = null;
-		this.userAge.value = null;
-		this.addUserName.value = null;
-		this.addUserAge.value = null;
-		return this.userContainer;
-	}
-
 	async getByNameAndAge() {
 		await this.getUserData(this.END_POINT, "get");
 		this.userData["data"].forEach(user => {
@@ -157,6 +146,17 @@ class ShowUser extends Render {
 		const userCard = event.target.form;
 		userCard.remove();
 		await this.getUserData(`${this.END_POINT}/${userCard.id}`, "delete");
+	}
+
+	clearPage() {
+		while (this.userContainer.firstChild) {
+			this.userContainer.removeChild(this.userContainer.firstChild);
+		}
+		this.userName.value = null;
+		this.userAge.value = null;
+		this.addUserName.value = null;
+		this.addUserAge.value = null;
+		return this.userContainer;
 	}
 
 	changeActivity(element) {
