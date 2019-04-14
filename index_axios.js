@@ -21,12 +21,15 @@ class Render {
 		return father;
 	}
 
-	createUserCard(name, age, id) {
+	createUserCard(name, age, id, picture) {
 		const formWrap = this.createElement("div", false, "form-wrapper");
 
 		const userCardForm = this.createElement("form", false, "user-form");
 		userCardForm.id = id;
 		const fieldset = this.createElement("fieldset", false, "form-fieldset");
+
+		const photoElement = this.createElement("div", false, "user-picture");
+		photoElement.style.backgroundImage = `url(${picture})`;
 
 		const formDecoration = this.createElement("legend", false, "form-decoration");
 		formDecoration.textContent = "USER CARD";
@@ -48,7 +51,7 @@ class Render {
 
 		this.appendElement(buttonContainer, buttonChange, buttonSave, buttonDelete);
 		this.appendElement(userCardForm, fieldset);
-		this.appendElement(fieldset, formDecoration, userName, userAge, buttonContainer);
+		this.appendElement(fieldset, photoElement, formDecoration, userName, userAge, buttonContainer);
 		this.appendElement(formWrap, userCardForm);
 		this.appendElement(this.userContainer, formWrap);
 		return userCardForm;
@@ -57,21 +60,21 @@ class Render {
 
 class ShowUser extends Render {
   constructor() {
-        super();
-        this.users = axios.create({
-            baseURL: "https://test-users-api.herokuapp.com",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        });
-        this.newUsers = axios.create({
-            baseURL: "https://randomuser.me",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        });
+		super();
+		this.users = axios.create({
+			baseURL: "https://test-users-api.herokuapp.com",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			}
+		});
+		this.newUsers = axios.create({
+			baseURL: "https://randomuser.me",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			}
+		});
 		this.userName = document.querySelector(".search__user-name");
 		this.userAge = document.querySelector(".search__user-age");
 		this.addUserName = document.querySelector(".create__user-name");
@@ -79,11 +82,14 @@ class ShowUser extends Render {
 	}
     
 	async getAllUser() {
-        const users = await this.users.get("/users");
-        users.data.data.forEach(user => {
-			return this.createUserCard(user.name, user.age, user.id);
+		let i = 0;
+		const users = await this.users.get("/users");
+		const photoData = await this.newUsers.get("/api/?results=20");
+		users.data.data.forEach(user => {
+			this.createUserCard(user.name, user.age, user.id, photoData.data.results[i].picture.large);
+			return i++;
 		});
-    }
+  }
     
 	searchByName(user) {
 		if (user.name.toLowerCase() === this.userName.value.toLowerCase()) {
@@ -178,21 +184,21 @@ class ShowUser extends Render {
 	}
 
 	async updateServer() {
-        let arrOfId = [];
-        const users = await this.users.get("/users");
-		users.data.data.forEach(object => {
-			arrOfId.push(object.id);
-		});
-		arrOfId.forEach(async id => {
-            await this.users.delete(`/users/${id}`);
-        });
-        const newUsers = await this.newUsers.get("/api/?results=20");
-		newUsers.data.results.forEach(async object => {
+			let arrOfId = [];
+			const users = await this.users.get("/users");
+			users.data.data.forEach(object => {
+				arrOfId.push(object.id);
+			});
+			arrOfId.forEach(async id => {
+				await this.users.delete(`/users/${id}`);
+			});
+			const newUsers = await this.newUsers.get("/api/?results=20");
+			newUsers.data.results.forEach(async object => {
 			const newUser = {
 				name: object.name.first.charAt(0).toUpperCase() + object.name.first.slice(1),
-				age: (Math.floor(Math.random() * (110 - 1)))
-            }
-            await this.users.post("/users", newUser);
+				age: object.registered.age
+			}
+			await this.users.post("/users", newUser);
 		});
 	}
 }
