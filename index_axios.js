@@ -196,7 +196,7 @@ class ShowUser extends Render {
 			newUsers.data.results.forEach(async object => {
 			const newUser = {
 				name: object.name.first.charAt(0).toUpperCase() + object.name.first.slice(1),
-				age: object.registered.age
+				age: Math.floor(Math.random() * 120)
 			}
 			await this.users.post("/users", newUser);
 		});
