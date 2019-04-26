@@ -184,18 +184,20 @@ class ShowUser extends Render {
 	}
 
 	async updateServer() {
-			let arrOfId = [];
-			const users = await this.users.get("/users");
-			users.data.data.forEach(object => {
-				arrOfId.push(object.id);
-			});
-			arrOfId.forEach(async id => {
-				await this.users.delete(`/users/${id}`);
-			});
-			const newUsers = await this.newUsers.get("/api/?results=20");
-			newUsers.data.results.forEach(async object => {
+		let arrOfId = [];
+		const users = await this.users.get("/users");
+		users.data.data.forEach(object => {
+			arrOfId.push(object.id);
+		});
+		arrOfId.forEach(async id => {
+			await this.users.delete(`/users/${id}`);
+		});
+		const newUsers = await this.newUsers.get("/api/?results=20");
+		newUsers.data.results.forEach(async object => {
+			const capitalizedFirstName = object.name.first.charAt(0).toUpperCase() + object.name.first.slice(1);
+			const capitalizedLastName = object.name.last.charAt(0).toUpperCase() + object.name.last.slice(1);
 			const newUser = {
-				name: object.name.first.charAt(0).toUpperCase() + object.name.first.slice(1),
+				name: `${capitalizedFirstName} ${capitalizedLastName}`,
 				age: Math.floor(Math.random() * 120)
 			}
 			await this.users.post("/users", newUser);
